@@ -1,5 +1,5 @@
 ---
-title: About
-layout: page
+title: Welcome
+layout: home
 ---
 
