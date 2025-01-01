@@ -1,57 +1,141 @@
-<header>
+# jekyll-theme-experiment
 
-<!--
-  <<< Author notes: Course header >>>
-  Include a 1280×640 image, course title in sentence case, and a concise description in emphasis.
-  In your repository settings: enable template repository, add your 1280×640 social image, auto delete head branches.
-  Add your open source license, GitHub uses MIT license.
--->
+Since I started using [Jekyll](https://jekyllrb.com/) I have wanted to make a theme, so I have decided to create it to publish my portfolio.
 
-# GitHub Pages
+![](https://cl.ly/2F3f432B0z09/Screen%20Recording%202018-02-24%20at%2011.23%20p.m..gif)
 
-_Create a site or blog from your GitHub repositories with GitHub Pages._
+Made with ♥️ by @anxhe
 
-</header>
+Your can see a demo [here](https://anxhe.github.io/jekyll-theme-experiment/)
 
-<!--
-  <<< Author notes: Finish >>>
-  Review what we learned, ask for feedback, provide next steps.
--->
+## Installation
 
-## Finish
+You will need to have installed [ruby](https://www.ruby-lang.org/en/documentation/installation/).
 
-_Congratulations friend, you've completed this course!_
+Then, in a bash terminal execute the following commands:
 
-<img src=https://octodex.github.com/images/constructocat2.jpg alt=celebrate width=300 align=right>
+```sh
+gem install bundler jekyll
+```
 
-Your blog is now live and has been deployed!
+## Usage
 
-Here's a recap of all the tasks you've accomplished in your repository:
+- Create a new Jekyll site (by running the `jekyll new` command), Jekyll installs a site that uses a gem-based theme called Minima.
 
-- You enabled GitHub Pages.
-- You selected a theme using the config file.
-- You learned about proper directory format and file naming conventions in Jekyll.
-- You created your first blog post with Jekyll!
+```bash
+jekyll new <your-blog-name>
+cd <your-blog-name>
+```
+- Now we have to replace the `minima` gem with `jekyll-theme-experiment` in `Gemfile`, as follows:
 
-### What's next?
+```diff
+# Gemfile
+- gem "minima", "~> 2.0"
++ gem 'jekyll-theme-experiment'
+```
 
-- Keep working on your GitHub Pages site... we love seeing what you come up with!
-- We'd love to hear what you thought of this course [in our discussion board](https://github.com/orgs/skills/discussions/categories/github-pages).
-- [Take another GitHub Skills course](https://github.com/skills).
-- [Read the GitHub Getting Started docs](https://docs.github.com/en/get-started).
-- To find projects to contribute to, check out [GitHub Explore](https://github.com/explore).
+- Then run:
 
-<footer>
+`bundle install`
 
-<!--
-  <<< Author notes: Footer >>>
-  Add a link to get support, GitHub status page, code of conduct, license link.
--->
+- Next, we need to replace `minima` theme key in `_config.yml` as follows:
 
+```yml
+# _config.yml
+theme: jekyll-theme-experiment
+```
+
+- Each section and content is customizable via `_config.yml` file:
+
+Replace the sample data with your own:
+
+```yml
+
+title: Your awesome title
+description: >- # this means to ignore newlines until "baseurl:"
+  Write an awesome description for your new site here. You can edit this
+  line in _config.yml. It will appear in your document head meta (for
+  Google search results) and in your feed.xml site description.
+```
+
+jekyll-theme-experiment allows you to customize the following sections in the main layout:
+
+  - about
+  - portfolio
+  - tools
+
+Add the following sample data to try it:
+
+```yml
+jekyll-theme-experiment:
+  about: # optional
+    avatar: https://robohash.org/experiment-avatar.png?size=300x300
+
+  portfolio: # optional
+    title: Portfolio
+    # Depending of the number of projects, you will need to update $projects
+    # variable in a sass file. e.g.
+    # _sass/main.scss
+    #
+    projects:
+      - name: Jekyll Theme experiment
+        link: http://example.com
+        github: https://github.com/anxhe/jekyll-theme-experiment
+        img_relative_url: /assets/example.png
+
+  tools: # optional
+    title: Tools and Experience 
+    icons:
+      - relative_url: /assets/icons/bitbucket/bitbucket-original.svg
+```
+
+By default, jekyll generates a couple markdown files, we'll need to make
+a few changes:
+
+- Update `index.md` adding `title: home` to yaml's frontmatter
+- Delete `about.md`, as this theme uses similar in the home layout.
+- If you pretend use this site for blogging, you'll need to create a `blog.md` file with the following contents:
+
+![](https://cl.ly/3h3v3b210c0p/Screen%20Recording%202018-02-24%20at%2011.27%20p.m..gif)
+
+```md
 ---
+layout: blog
+title: blog
+permalink: /blog/
+---
+```
 
-Get help: [Post in our discussion board](https://github.com/orgs/skills/discussions/categories/github-pages) &bull; [Review the GitHub status page](https://www.githubstatus.com/)
+Now we're ready, start the server:
 
-&copy; 2023 GitHub &bull; [Code of Conduct](https://www.contributor-covenant.org/version/2/1/code_of_conduct/code_of_conduct.md) &bull; [MIT License](https://gh.io/mit)
+```sh
+bundle exec jekyll serve
+```
 
-</footer>
+Finally, open  http://127.0.0.1:4000/ in the browser, and that's it, feel free to poke around.
+
+## Customize navigation links
+
+**Taken from minima theme**
+
+This allows you to set which pages you want to appear in the navigation area and configure order of the links. For instance, to only link to the about and the portfolio page, add the following to your `_config.yml`:
+
+```yml
+header_pages:
+  - about.md
+  - portfolio.md
+```
+
+## Contributing
+
+Bug reports and pull requests are welcome on GitHub at https://github.com/anxhe/jekyll-theme-experiment/issues. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+
+## Credits
+
+- [Jekyll](https://github.com/jekyll/jekyll) and [Minima](https://github.com/jekyll/minima) - Thanks to their creators and contributors
+- [Vitaly Rubtsov](https://dribbble.com/Vitwai) for inspiration on  his [hamburguer menu animation](https://dribbble.com/shots/2293621-Hamburger-Menu-Animation)
+- [Luis Manuel](https://scotch.io/@lmgonzalves) for his implementation of the above hamburger menu on [this tutorial](https://scotch.io/tutorials/building-a-morphing-hamburger-menu-with-css)
+
+## License
+
+The theme is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
